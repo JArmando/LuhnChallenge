@@ -12,7 +12,7 @@ namespace LuhnChallenge
             var checkNumber = 0;
             var isOther = false;
 
-            for (var i = inputString.Length-1; i == 0; i--)
+            for (var i = inputString.Length-1; i > -1; i--)
             {
                 numbers[i] = int.Parse(inputString[i].ToString());
                 if (isOther)
