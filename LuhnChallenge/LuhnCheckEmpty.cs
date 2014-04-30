@@ -14,13 +14,14 @@ namespace LuhnChallenge
 
             for (var i = inputString.Length-1; i > -1; i--)
             {
-                numbers[i] = int.Parse(inputString[i].ToString());
+                numbers[i] = int.Parse(inputString.Substring(i, 1));
                 if (isOther)
                 {
                     numbers[i] = numbers[i]*2;
                     if (numbers[i] > 9)
                     {
-                        numbers[i] = int.Parse(numbers[i].ToString()[0].ToString()) + int.Parse(numbers[i].ToString()[1].ToString());
+                        //numbers[i] = int.Parse(numbers[i].ToString()[0].ToString()) + int.Parse(numbers[i].ToString()[1].ToString());
+                        numbers[i] = nthdigit(numbers[i], 0) + nthdigit(numbers[i], 1);
                         //This needs to be done in a more optimized way.
                     }
                     isOther = false;
@@ -33,8 +34,19 @@ namespace LuhnChallenge
                 checkNumber = checkNumber + numbers[i];
             }
 
-            return checkNumber.ToString().EndsWith("0");
+            return (checkNumber % 10 == 0);
         }
+
+        private int nthdigit(int x, int n)
+        {
+            while (n-- > 0)
+            {
+                x /= 10;
+            }
+            return (x % 10);
+        }
+
+
     }
 }
 
